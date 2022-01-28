@@ -4,36 +4,34 @@ const formEl = document.querySelector('.feedback-form');
 
 const STORAGE_KEY = 'feedback-form-state';
 const formData = {};
+const savedMessage = localStorage.getItem(STORAGE_KEY);
+const parsedMessage = JSON.parse(savedMessage);
 
 formEl.addEventListener('submit', onFormSubmit);
 formEl.addEventListener('input', throttle(onTextareaInput, 500));
 
-// populateFormInputs();
+populateFormInputs();
 
 function onFormSubmit(e) {
   e.preventDefault();
-
-  populateFormInputs();
+  // populateFormInputs();
+  console.log(parsedMessage);
 
   formEl.reset();
-
   localStorage.removeItem(STORAGE_KEY);
 }
 
 function onTextareaInput(e) {
   formData[e.target.name] = e.target.value;
-
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
 function populateFormInputs() {
-  const savedMessage = localStorage.getItem(STORAGE_KEY);
-  const parsedMessage = JSON.parse(savedMessage);
-
+  // const savedMessage = localStorage.getItem(STORAGE_KEY);
+  // const parsedMessage = JSON.parse(savedMessage);
   if (savedMessage) {
     formEl.email.value = parsedMessage.email;
     formEl.message.value = parsedMessage.message;
   }
-
-  console.log(parsedMessage);
+  // console.log(parsedMessage);
 }
