@@ -8,12 +8,15 @@ const formData = {};
 formEl.addEventListener('submit', onFormSubmit);
 formEl.addEventListener('input', throttle(onTextareaInput, 500));
 
-populateFormInputs();
+// populateFormInputs();
 
 function onFormSubmit(e) {
   e.preventDefault();
 
+  populateFormInputs();
+
   formEl.reset();
+
   localStorage.removeItem(STORAGE_KEY);
 }
 
